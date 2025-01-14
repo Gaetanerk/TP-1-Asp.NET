@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TPTodoList.Models.TodoList>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Form">Nouvelle Tâche</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tâche
+            </th>
+            <th>
+                État
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Task)
+            </td>
+            <td>
+					@if (item.IsComplete == false)
+					{
+						<text>En cours</text>
+					}
+					else
+					{
+						<text>Terminée</text>
+					}
+            </td>
+            <td>
+                @if (item.IsComplete == false)
+                {
+                    <a asp-action="MarkComplete" asp-route-id="@item.Id">Terminée | </a>
+                }
+                    <a asp-action="DeleteTask" asp-route-id="@item.Id">Supprimer</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
