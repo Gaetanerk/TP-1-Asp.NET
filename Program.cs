@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TPTodoList.Data;
+using TPTodoList.Models;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TPTodoListContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TPTodoListContext") ?? throw new InvalidOperationException("Connection string 'TPTodoListContext' not found.")));
@@ -9,6 +10,12 @@ builder.Services.AddDbContext<TPTodoListContext>(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
