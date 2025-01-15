@@ -30,6 +30,7 @@
             <th>
                 Actions
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -62,6 +63,12 @@
                             <span> | </span>
                     }
                     <a asp-action="DeleteTask" asp-route-id="@item.Id" style="text-decoration: none; color: red">Supprimer</a>
+                </td>
+                <td>
+                    @if (item.DueDateTime < DateTime.Now & item.IsComplete == false)
+                    {
+                        <span style="color: orange;">Retard</span>
+                    }
                 </td>
             </tr>
         }
