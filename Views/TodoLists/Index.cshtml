@@ -19,7 +19,10 @@
                 Tâche
             </th>
             <th>
-                Date d'échéance
+                Date
+            </th>
+            <th>
+                Heure
             </th>
             <th>
                 État
@@ -38,6 +41,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DueDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DueTime)
                 </td>
                 <td>
                     @if (item.IsComplete == false)

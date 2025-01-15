@@ -39,6 +39,8 @@ namespace TPTodoList.Controllers
             var totalItems = await query.CountAsync();
             var todoLists = await query
                 .OrderByDescending(t => t.IsComplete)
+                .ThenBy(t => t.DueDate)
+                .ThenBy(t => t.DueTime)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -61,7 +63,7 @@ namespace TPTodoList.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Form([Bind("Id,Task,DueDate,IsComplete")] TodoList todoList)
+        public async Task<IActionResult> Form([Bind("Id,Task,DueDate,DueTime,IsComplete")] TodoList todoList)
         {
             if (ModelState.IsValid)
             {
