@@ -20,9 +20,18 @@ namespace TPTodoList.Controllers
         }
 
         // GET: TodoLists
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10)
         {
-            return View(await _context.TodoList.ToListAsync());
+            var totalItems = await _context.TodoList.CountAsync();
+            var todoLists = await _context.TodoList
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            ViewBag.CurrentPage = pageNumber;
+            ViewBag.TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+
+            return View(todoLists);
         }
 
         // GET: TodoLists/Form
@@ -46,6 +55,7 @@ namespace TPTodoList.Controllers
             }
             return View(todoList);
         }
+
 
         public async Task<IActionResult> MarkComplete(int id)
         {

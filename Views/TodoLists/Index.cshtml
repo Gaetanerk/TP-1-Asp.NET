@@ -16,7 +16,9 @@
             <th>
                 État
             </th>
-            <th></th>
+            <th>
+				Actions
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -26,23 +28,35 @@
                 @Html.DisplayFor(modelItem => item.Task)
             </td>
             <td>
-					@if (item.IsComplete == false)
-					{
-						<text>En cours</text>
-					}
-					else
-					{
-						<text>Terminée</text>
-					}
+				@if (item.IsComplete == false)
+				{
+					<span style="color: blue">En cours</span>
+				}
+				else
+				{
+                    <span style="color: grey">Terminée</span>
+				}
             </td>
             <td>
                 @if (item.IsComplete == false)
                 {
-                    <a asp-action="MarkComplete" asp-route-id="@item.Id">Terminée | </a>
+                    <a asp-action="MarkComplete" asp-route-id="@item.Id" style="text-decoration: none; color: green">Terminée</a>
+                    <span> | </span>
                 }
-                    <a asp-action="DeleteTask" asp-route-id="@item.Id">Supprimer</a>
+                    <a asp-action="DeleteTask" asp-route-id="@item.Id" style="text-decoration: none; color: red">Supprimer</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<div>
+    @if (ViewBag.CurrentPage > 1)
+    {
+            <a asp-action="Index" asp-route-pageNumber="@(ViewBag.CurrentPage - 1)" asp-route-pageSize="@ViewBag.PageSize">Précédent</a>
+    }
+    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+    {
+            <a asp-action="Index" asp-route-pageNumber="@(ViewBag.CurrentPage + 1)" asp-route-pageSize="@ViewBag.PageSize">Suivant</a>
+    }
+</div>
