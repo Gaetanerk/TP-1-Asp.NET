@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using TPTodoList.Data;
 using TPTodoList.Models;
+using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 
 namespace TPTodoList.Controllers
 {
@@ -39,8 +41,7 @@ namespace TPTodoList.Controllers
             var totalItems = await query.CountAsync();
             var todoLists = await query
                 .OrderByDescending(t => t.IsComplete)
-                .ThenBy(t => t.DueDate)
-                .ThenBy(t => t.DueTime)
+                .ThenBy(t => t.DueDateTime)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -59,14 +60,13 @@ namespace TPTodoList.Controllers
         }
 
         // POST: TodoLists/Form
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Form([Bind("Id,Task,DueDate,DueTime,IsComplete")] TodoList todoList)
+        public async Task<IActionResult> Form([Bind("Id,Task,IsComplete")] TodoList todoList, DateTime DueDate, TimeSpan DueTime)
         {
             if (ModelState.IsValid)
             {
+                todoList.DueDateTime = DueDate.Add(DueTime);
                 _context.Add(todoList);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

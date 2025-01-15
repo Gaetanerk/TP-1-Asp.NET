@@ -13,14 +13,8 @@ namespace TPTodoList.Models
         public string Task { get; set; }
 
         [Required(ErrorMessage = "Ce champ est obligatoire")]
-        [Display(Name = "Date de réalisation")]
-        [DataType(DataType.Date)]
-        public DateTime DueDate { get; set; }
-
-        [Required(ErrorMessage = "Ce champ est obligatoire")]
-        [Display(Name = "Heure de réalisation")]
-        [DataType(DataType.Time)]
-        public DateTime DueTime { get; set; }
+        [Display(Name = "Date et heure de réalisation")]
+        public DateTime DueDateTime { get; set; }
 
         public bool IsComplete { get; set; } = false;
     }

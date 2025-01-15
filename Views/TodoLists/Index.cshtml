@@ -40,10 +40,10 @@
                     @Html.DisplayFor(modelItem => item.Task)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DueDate)
+                    @item.DueDateTime.ToString("dd/MM/yyyy")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DueTime)
+                    @item.DueDateTime.ToString("HH:mm")
                 </td>
                 <td>
                     @if (item.IsComplete == false)
