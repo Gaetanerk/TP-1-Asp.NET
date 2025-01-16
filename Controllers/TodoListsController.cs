@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using NuGet.Protocol.Core.Types;
 using TPTodoList.Data;
 using TPTodoList.Models;
 using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
@@ -24,6 +25,12 @@ namespace TPTodoList.Controllers
         // GET: TodoLists
         public async Task<IActionResult> Index(string filter = "all", int pageNumber = 1, int pageSize = 10)
         {
+            var username = HttpContext.Session.GetString("Username");
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             IQueryable<TodoList> query = _context.TodoList;
 
             switch (filter.ToLower())
@@ -49,6 +56,7 @@ namespace TPTodoList.Controllers
             ViewBag.CurrentPage = pageNumber;
             ViewBag.TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
             ViewBag.Filter = filter;
+            ViewBag.Username = username;
 
             return View(todoLists);
         }

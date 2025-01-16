@@ -1,0 +1,25 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<head>
+	<title>Connexion</title>
+</head>
+<body>
+	<h2>Connexion</h2>
+	<form method="post" asp-action="Login">
+		<label for="username">Nom d'utilisateur</label>
+		<input type="text" id="username" name="username" required>
+		<br />
+		<label for="password">Mot de passe</label>
+		<input type="password" id="password" name="password" required>
+		<br />
+		<button type="submit">Se connecter</button>
+		<p style="color: red" @ViewBag.Message></p>
+	</form>
+	<p>
+		<a asp-action="Register">Créer un compte</a>
+	</p>
+</body>
+</html>

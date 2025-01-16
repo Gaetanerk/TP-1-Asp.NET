@@ -4,6 +4,11 @@
     ViewData["Title"] = "Index";
 }
 
+<div>
+    <p>@ViewBag.Username</p>
+    <a asp-controller="Auth" asp-action="Logout">Se déconnecter</a>
+</div>
+
 <p>
     <a asp-action="Form">Nouvelle Tâche</a>
 </p>

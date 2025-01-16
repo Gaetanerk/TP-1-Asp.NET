@@ -9,11 +9,12 @@ namespace TPTodoList.Data
 {
     public class TPTodoListContext : DbContext
     {
-        public TPTodoListContext (DbContextOptions<TPTodoListContext> options)
+        public TPTodoListContext(DbContextOptions<TPTodoListContext> options)
             : base(options)
         {
         }
 
-        public DbSet<TPTodoList.Models.TodoList> TodoList { get; set; } = default!;
+        public DbSet<User> Users { get; set; }
+        public DbSet<TodoList> TodoList { get; set; }
     }
 }
