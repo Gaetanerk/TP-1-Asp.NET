@@ -1,25 +1,40 @@
 ﻿@{
-	Layout = null;
+    Layout = null;
 }
 
 <!DOCTYPE html>
+<html lang="fr">
 <head>
-	<title>Connexion</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<h2>Connexion</h2>
-	<form method="post" asp-action="Login">
-		<label for="username">Nom d'utilisateur</label>
-		<input type="text" id="username" name="username" required>
-		<br />
-		<label for="password">Mot de passe</label>
-		<input type="password" id="password" name="password" required>
-		<br />
-		<button type="submit">Se connecter</button>
-		<p style="color: red" @ViewBag.Message></p>
-	</form>
-	<p>
-		<a asp-action="Register">Créer un compte</a>
-	</p>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center">Connexion</h2>
+                <form method="post" asp-action="Login">
+                    <div class="form-group">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-danger mt-3">@ViewBag.Message</div>
+                    }
+                </form>
+                <p class="text-center mt-3">
+                    <a asp-action="Register">Créer un compte</a>
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

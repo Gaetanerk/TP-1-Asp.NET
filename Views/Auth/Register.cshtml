@@ -1,21 +1,36 @@
 ﻿@{
-	Layout = null;
+    Layout = null;
 }
 
 <!DOCTYPE html>
+<html lang="fr">
 <head>
-	<title>S'enregistrer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S'enregistrer</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<h2>S'enregstrer</h2>
-	<form method="post" asp-action="Register">
-		<label for="username">Nom d'utilisateur</label>
-		<input type="text" id="username" name="username" required>
-		<br />
-		<label for="password">Mot de passe</label>
-		<input type="password" id="password" name="password" required>
-		<br />
-		<button type="submit">Valider</button>
-	</form>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center">Créer un compte</h2>
+                <form method="post" asp-action="Register">
+                    <div class="form-group">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+                </form>
+                <p class="text-center mt-3">
+                    <a asp-action="Login">Retour à la page de connexion</a>
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
